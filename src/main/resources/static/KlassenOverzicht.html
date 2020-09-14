@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KlassenOverzicht en voeg klas toe</title>
+    <link href="Opmaak.css" rel="stylesheet">
+    <link href="Menu.css" rel="stylesheet">
+    <script defer src="KlassenOverzicht.js"></script>
+    <script defer src="modal.js"></script>
+    <script defer src="Editfunction.js"></script>
+</head>
+
+<body onload=laatKlassenZien()>
+
+    <div id="menu" class="sidenav">
+        <a href="KlassenOverzicht.html">Klassen</a>
+        <a href="Leerlingoverzicht.html">Leerlingen</a>
+        <a href="Docentoverzicht.html">Docenten</a>
+        <a href="ToetsOverzicht.html">Toetsen</a>
+        <a href="VakOverzicht.html">Vakken</a>
+        <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+        <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+        <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+        <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+        <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+        <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+    </div>
+
+    <div id="main" class="main">
+        <hr>
+        <hr>
+        <h1>WELKOM IN HET KLASSENOVERZICHT</h1>
+        <p> hier kun je klassen bekijken en aanmaken </p>
+        <hr>
+        <hr>
+        <table border=2 id=tabel></table>
+
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="title">Maak een nieuwe klas aan</div>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text"> Naam <input type="text" id="naamInput" class="modal-textInput"></div>
+                <div class="modal-text"> Niveau <input type="text" id="niveauInput" class="modal-textInput"></div>
+            </div>
+            <button data-create-button class="create-button" onclick=maakKlasAan()>Maak klas aan</button>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="title">
+          <div class="title">Edit klas</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-text"> ID <input type="text" id="idEdit" class="modal-textInput"> </div>
+          <div class="modal-text"> Naam <input type="text" id="naamEdit" class="modal-textInput"> </div>
+          <div class="modal-text"> Niveau <input type="text" id="niveauEdit" class="modal-textInput"></div>
+        </div>
+        <button data-create-button class="create-button" onclick=postEditKlasData()>Edit Klas</button>
+      </div>
+      <div id="overlay"></div>
+    </div>
+</body>
+
+</html>

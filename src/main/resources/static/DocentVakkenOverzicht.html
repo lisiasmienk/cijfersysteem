@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voeg vak aan docent toe</title>
+    <link href="Opmaak.css" rel="stylesheet">
+    <link href="Menu.css" rel="stylesheet">
+    <script defer src="DocentVakkenOverzicht.js"></script>
+    <script defer src="dropDowns.js"></script>
+</head>
+
+<body onload=maakDropDowns()>
+
+    <div id="menu" class="sidenav">
+        <a href="KlassenOverzicht.html">Klassen</a>
+        <a href="Leerlingoverzicht.html">Leerlingen</a>
+        <a href="Docentoverzicht.html">Docenten</a>
+        <a href="ToetsOverzicht.html">Toetsen</a>
+        <a href="VakOverzicht.html">Vakken</a>
+        <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+        <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+        <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+        <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+        <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+        <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+    </div>
+
+    <div id="main" class="main">
+
+        <hr>
+        <hr>
+        <h1>DOCENT EN VAK KOPPELEN</h1>
+        <hr>
+        <hr>
+        <label>Selecteer een docent</label>
+        <select id="kiesdocent" onchange=toonVakken(this.value)></select>
+        <br><br>
+
+        <label>Vak</label>
+        <select id="kiesvak"></select>
+        <input type=button value="Voeg toe" onclick=maakDocentVakAan()>
+        <br><br>
+
+        <table id="tabel" border=5>
+            <tr><td>Selecteer eerst een docent</td></tr>
+        </table>
+
+        <div id="overlay"></div>
+    </div>
+</body>
+
+</html>

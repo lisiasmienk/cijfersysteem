@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voeg vak aan klas toe</title>
+    <link href="Opmaak.css" rel="stylesheet">
+    <link href="Menu.css" rel="stylesheet">
+    <script defer src="KlasVakOverzicht.js"></script>
+    <script defer src="dropDowns.js"></script>
+</head>
+
+<body onload=maakDropDowns()>
+
+    <div id="menu" class="sidenav">
+        <a href="KlassenOverzicht.html">Klassen</a>
+        <a href="Leerlingoverzicht.html">Leerlingen</a>
+        <a href="Docentoverzicht.html">Docenten</a>
+        <a href="ToetsOverzicht.html">Toetsen</a>
+        <a href="VakOverzicht.html">Vakken</a>
+        <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+        <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+        <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+        <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+        <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+        <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+    </div>
+
+    <div id="main" class="main">
+        <hr>
+        <hr>
+        <h1>VAKKENOVERZICHT VAN EEN KLAS</h1>
+        <p> hier kun je zien welke vakken een klas volgt en vakken toevoegen aan het vakkenpakket</p>
+        <hr>
+        <hr>
+        <label>Selecteer een klas</label>
+        <select id="kiesklas" onchange=toonVakken(this.value)></select>
+        <br><br>
+
+        <label>Vak</label>
+        <select id="kiesvak" onchange=maakDocentenDropdownVoorVak()></select><br><br>
+        <label>Docent</label>
+        <select id="kiesdocent"></select><br><br>
+        <input type=button value="Voeg toe" onclick=voegVakToe()>
+        <br><br>
+
+        <table id="tabel" border=5>
+            <tr><td>Selecteer eerst een klas</td></tr>
+        </table>
+
+
+        <div id="overlay"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- <script src="moment.js"></script> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docentenoverzicht en toevoegen van docent</title>
+  <link href="Opmaak.css" rel="stylesheet">
+  <link href="Menu.css" rel="stylesheet">
+  <script defer src="Docentoverzicht.js"></script>
+  <script defer src="modal.js"></script>
+  <script defer src="Editfunction.js"></script>
+
+</head>
+
+
+<body onload=laatDocentenZien()>
+  <div id="menu" class="sidenav">
+    <a href="KlassenOverzicht.html">Klassen</a>
+    <a href="Leerlingoverzicht.html">Leerlingen</a>
+    <a href="Docentoverzicht.html">Docenten</a>
+    <a href="ToetsOverzicht.html">Toetsen</a>
+    <a href="VakOverzicht.html">Vakken</a>
+    <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+    <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+    <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+    <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+    <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+    <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+  </div>
+
+  <div id="main" class="main">
+    <hr>
+    <hr>
+    <h1>WELKOM IN HET DOCENTOVERZICHT</h1>
+    <p> hier kun je docenten bekijken, aanpassen en toevoegen </p>
+    <hr>
+    <hr>
+    <table border=2 id=tabel></table>
+
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">Maak nieuwe docent aan</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
+        <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
+        <!-- /// inputtype hieronder selectie(s?) van vakkendatabase -->
+      </div>
+      <button data-create-button class="create-button" onclick=maakDocentAan()>Maak docent aan</button>
+    </div>
+    <div id="overlay"></div>
+  </div>
+
+
+  <div class="modal" id="editModal">
+    <div class="title">
+      <div class="title">Edit docent</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text"> Id <input type="text" id="idEdit" class="modal-textInput"> id uneditable maken</div>
+      <div class="modal-text"> Voornaam <input type="text" id="voornaamEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Achternaam <input type="text" id="achternaamEdit" class="modal-textInput"></div>
+      <!-- /// inputtype hieronder selectie(s?) van vakkendatabase -->
+      <!-- <div class="modal-text"> Vakken <input type="text" id="vakkenInput" class="modal-textInput"></div> -->
+    </div>
+    <button data-create-button class="create-button" onclick=postEditDocentData()>Edit Docent</button>
+  </div>
+  <div id="overlay"></div>
+</div>
+</body>
+
+</html>

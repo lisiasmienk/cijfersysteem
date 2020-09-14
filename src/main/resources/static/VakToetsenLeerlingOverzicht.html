@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeerlingCijfersPerVakOverzicht</title>
+    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <script defer src="VakToetsenLeerlingOverzicht.js"></script>
+    <script defer src="dropDowns.js"></script>
+</head>
+
+<body onload=maakDropDowns()>
+    <hr>
+    <hr>
+    <h1>OVERZICHT VAN CIJFERS PER VAK VOOR SPECIFIEKE LEERLING</h1>
+    <p> hier kun je als leerling je cijfers per vak zien</p>
+
+    <label>Selecteer jezelf (leerling)</label>
+    <select id="kiesleerling" onchange=toonLeerlingen(this.value)></select>
+    <hr><hr>
+    
+    <table id="tabelA" border=5></table>
+    <input type=button value="toon mijn cijfers per vak" onclick=laatVakCijferTabelZien() >
+    <hr>
+    <hr>
+    <br><br>
+
+    <!-- <label>VAK</label>
+    <select id="kiesvak" onchange=toonVakken(this.value)></select>
+    <br><br> -->
+
+    <table id="tabel" border=5></table>
+
+
+
+    <div id="overlay"></div>
+</body>
+
+</html>

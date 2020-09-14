@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overzicht toetsen per vak</title>
+    <link href="Opmaak.css" rel="stylesheet">
+    <link href="Menu.css" rel="stylesheet">
+    <script defer src="VakToetsenOverzicht.js"></script>
+    <script defer src="dropDowns.js"></script>
+</head>
+
+<body onload=maakVakkenDropdown()>
+
+    <div id="menu" class="sidenav">
+        <a href="KlassenOverzicht.html">Klassen</a>
+        <a href="Leerlingoverzicht.html">Leerlingen</a>
+        <a href="Docentoverzicht.html">Docenten</a>
+        <a href="ToetsOverzicht.html">Toetsen</a>
+        <a href="VakOverzicht.html">Vakken</a>
+        <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+        <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+        <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+        <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+        <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+        <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+    </div>
+
+    <div id="main" class="main">
+        <hr>
+        <hr>
+        <h1>TOETSENOVERZICHT PER VAK</h1>
+        <p> hier kunt u zien welke toetsen er zijn (geweest) voor dit vak</p>
+        <hr>
+        <hr>
+        <label>Selecteer een vak</label>
+        <select id="kiesvak" onchange=toonToetsen(this.value)></select>
+        <br><br>
+
+        <table id="tabel" border=5>
+            <tr><td>Selecteer eerst een vak</td></tr>
+        </table>
+        <div id="overlay"></div>
+    </div>
+</body>
+
+</html>

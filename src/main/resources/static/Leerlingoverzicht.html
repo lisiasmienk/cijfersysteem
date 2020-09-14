@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <script src="moment.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeerlingOverzicht en voeg leerling toe</title>
+  <link href="Opmaak.css" rel="stylesheet">
+  <link href="Menu.css" rel="stylesheet">
+  <script defer src="Leerlingoverzicht.js"></script>
+  <script defer src="modal.js"></script>
+  <script defer src="Editfunction.js"></script>
+
+</head>
+
+<body onload=laatLeerlingenTabelZien()>
+
+  <div id="menu" class="sidenav">
+    <a href="KlassenOverzicht.html">Klassen</a>
+    <a href="Leerlingoverzicht.html">Leerlingen</a>
+    <a href="Docentoverzicht.html">Docenten</a>
+    <a href="ToetsOverzicht.html">Toetsen</a>
+    <a href="VakOverzicht.html">Vakken</a>
+    <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+    <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+    <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+    <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+    <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+    <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+  </div>
+
+  <div id="main" class="main">
+    <hr>
+    <hr>
+    <h1>WELKOM IN HET LEERLINGOVERZICHT</h1>
+    <p> hier kun je leerlingen bekijken, aanpassen en toevoegen </p>
+    <hr>
+    <hr>
+
+    <table border=2 id=tabel></table>
+
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">Maak een nieuwe leerling aan</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
+        <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
+        <div class="modal-text"> Geboortedatum DD/MM/YYYY<input type="text" id="geboortedatumInput" class="modal-textInput"></div>
+        <div class="modal-text"> Leerlingnummer <input type="text" id="leerlingnrInput" class="modal-textInput"></div>
+        <button data-create-button class="create-button" onclick=maakLeerlingAan()>Maak leerling aan</button>
+      </div>
+    </div>
+  </div>
+    <div id="overlay"></div>
+  </div>
+
+
+  <div class="modal" id="editModal">
+    <div class="title">
+      <div class="title">Edit leerling</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text"> Id <input type="text" id="idEdit" class="modal-textInput"> id uneditable maken</div>
+      <div class="modal-text"> Voornaam <input type="text" id="voornaamEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Achternaam <input type="text" id="achternaamEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Geboortedatum (DD-MM-YYYY) <input type="text" id="geboortedatumEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Leerlingnummer <input type="text" id="leerlingnummerEdit" class="modal-textInput"></div>
+    </div>
+    <button data-create-button class="create-button" onclick=postEditLeerlingData()>Edit Leerling</button>
+  </div>
+  <div id="overlay"></div>
+</div>
+
+</body>
+
+</html>
