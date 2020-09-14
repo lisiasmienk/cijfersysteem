@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.DocentService;
-
+import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
 
@@ -31,6 +31,8 @@ public class DocentEndpoint {
 	DocentService ds;
 	@Autowired
 	VakService vs;
+	@Autowired
+	KlasService ks;
 	
 	@PostMapping("api/maakDocent")
 	public void maakDocent(@RequestBody Docent docent) { 
@@ -71,6 +73,19 @@ public class DocentEndpoint {
 		List<Klas> klassen = new ArrayList<>();
 		ds.getDocentById(docentid).get().getDocentvakken().forEach(dv -> klassen.addAll(dv.getKlassen()));
 		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
+	}
+	
+	@GetMapping("vakkenVanDocentEnKlas/{docentid}/{klasid}")
+	public Stream<VakDto> getVakkenVanDocentEnKlas(@PathVariable("docentid") Long docentid, @PathVariable("klasid") Long klasid){
+		List<Docentvak> docentvakken = ds.getDocentById(docentid).get().getDocentvakken();
+		Klas k = ks.getKlasById(klasid).get();
+		List<VakDto> vakken = new ArrayList<>();
+		for(Docentvak dv : docentvakken) {
+			if(dv.getKlassen().contains(k)) {
+				vakken.add(new VakDto(dv.getVak().getId(), dv.getVak().getNaam()));
+			}
+		}
+		return vakken.stream();
 	}
 	
 	@GetMapping("/docentenVanVak/{vakid}")
