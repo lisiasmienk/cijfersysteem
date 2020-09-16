@@ -1,6 +1,5 @@
 package com.cs.cijferSysteem.controller;
 
-import com.cs.cijferSysteem.domein.Cijfer;
 import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Toets;
@@ -11,8 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ToetsRepository extends JpaRepository<Toets, Long> {
 
-	List<Toets> findByCijfer(Cijfer c); //Wat gebeurt met deze??
-	
 	List<Toets> findByKlas(Klas k);
 	List<Toets> findByDocentvakAndKlas(Docentvak dv, Klas k);
 	
