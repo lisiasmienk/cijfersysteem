@@ -24,10 +24,6 @@ public class DocentService {
 		dr.save(docent);
 	}
 
-	public Optional<Docent> toonDocentById(Long id) {
-		return dr.findById(id);
-	}
-
 	public List<Docent> laatDocentZien() {
 		return dr.findAll();
 	}
@@ -35,6 +31,5 @@ public class DocentService {
 	public Optional<Docent> getDocentById(Long id) {
 		return dr.findById(id);
 	}
-
 }
 

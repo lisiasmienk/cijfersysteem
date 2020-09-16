@@ -11,7 +11,6 @@ import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Vak;
 
-
 @Service
 @Transactional
 public class DocentVakService {

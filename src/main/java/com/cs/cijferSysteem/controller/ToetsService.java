@@ -1,6 +1,7 @@
 package com.cs.cijferSysteem.controller;
 
 import com.cs.cijferSysteem.domein.Docentvak;
+import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Toets;
 import com.cs.cijferSysteem.domein.Vak;
 
@@ -31,19 +32,15 @@ public class ToetsService {
         return tr.findById(id);
     }
     
-    public List<Toets> findToetsByDocentvak(Long docentvakid){
-    	return tr.findByDocentvakId(docentvakid);
-    }
-    
-    public List<Toets> findToetsByDocentvakAndKlas(Long docentvakid, Long klasid){
-    	return tr.findByDocentvakIdAndKlasId(docentvakid, klasid);
-    }
-    
-    public List<Toets> findToetsByKlas(Long klasid){
-    	return tr.findByKlasId(klasid);
-    }
-
-    public List<Toets> findByDocentvak(Docentvak dv){
+    public List<Toets> findToetsByDocentvak(Docentvak dv){
     	return tr.findByDocentvak(dv);
+    }
+    
+    public List<Toets> findToetsByDocentvakAndKlas(Docentvak dv, Klas k){
+    	return tr.findByDocentvakAndKlas(dv, k);
+    }
+    
+    public List<Toets> findToetsByKlas(Klas k){
+    	return tr.findByKlas(k);
     }
 }

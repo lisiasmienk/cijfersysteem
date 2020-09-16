@@ -20,6 +20,7 @@ import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Cijfer;
 import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Docentvak;
+import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
 import com.cs.cijferSysteem.domein.Vak;
@@ -70,13 +71,14 @@ public class CijferEndpoint {
     
     @GetMapping("toonCijfersVan/{docentid}/{vakid}/{klasid}")
     public List<LeerlingCijfersVanDocentVakDto> leeringCijfersVanDocentVak(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
-    	List<Leerling> leerlingen = ks.getKlasById(klasid).get().getLeerlingen();
+    	Klas k = ks.getKlasById(klasid).get();
+    	List<Leerling> leerlingen = k.getLeerlingen();
     	
-    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
+    	Optional <Docent> docentOptional = ds.getDocentById(docentid);
     	Optional <Vak> vakOptional = vs.toonVakById(vakid);
     	
     	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
-    	Iterable<Toets> toetsen = ts.findToetsByDocentvakAndKlas(dv.getId(), klasid);
+    	Iterable<Toets> toetsen = ts.findToetsByDocentvakAndKlas(dv, k);
     	    	
     	//Deze lijst wordt returned
     	List<LeerlingCijfersVanDocentVakDto> list = new ArrayList<>();

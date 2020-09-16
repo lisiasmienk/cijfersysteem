@@ -19,8 +19,7 @@ public class LeerlingService {
 	
 	public void save(Leerling leerling){
 		lr.save(leerling);
-	}
-	
+	}	
 
 	public List<Leerling> laatLeerlingZien(){
 		return lr.findAll();
@@ -29,5 +28,4 @@ public class LeerlingService {
 	public Optional<Leerling> toonLeerling(Long id) {
 		return lr.findById(id);
 	}
-
 }

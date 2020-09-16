@@ -62,12 +62,13 @@ public class ToetsEndpoint {
     
     @GetMapping("toonToetsenVanDocentvak/{docentvakid}")
     public Stream<ToetsDto> toonToetsenVanDocentVak(@PathVariable("docentvakid") Long docentvakid){
-    	return ts.findToetsByDocentvak(docentvakid).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
+    	Docentvak dv = dvs.getDocentVakById(docentvakid).get();
+    	return ts.findToetsByDocentvak(dv).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
     }
     
     @GetMapping("toonToetsenVanDocent/{docentid}")
     public Stream<ToetsDto> toonToetsenVanDocent(@PathVariable("docentid") Long docentid){
-    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
+    	Optional <Docent> docentOptional = ds.getDocentById(docentid);
     	Iterable<Docentvak> docentvakken = dvs.getByDocent(docentOptional.get());
     	List<Toets> toetsen = new ArrayList<>();
     	for(Docentvak dv : docentvakken) {
@@ -99,8 +100,9 @@ public class ToetsEndpoint {
     
     @GetMapping("toonToetsenVanKlas/{klasid}")
     public Stream<ToetsDto> toonToetsenVanKlas(@PathVariable("klasid") Long klasid){
+    	Klas k = ks.getKlasById(klasid).get();
     	List<ToetsDto> dtos = new ArrayList<ToetsDto>();
-    	for(Toets t : ts.findToetsByKlas(klasid)) {
+    	for(Toets t : ts.findToetsByKlas(k)) {
     		ToetsDto dto = new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId());
     		dto.setDocentnaam(t.getDocent().getAchternaam());
     		dto.setVaknaam(t.getVak().getNaam());
@@ -114,7 +116,7 @@ public class ToetsEndpoint {
     @GetMapping("toonToetsenVanDocentEnVak/{docentid}/{vakid}")
     public Stream<ToetsDto> toonToetsenVanDocentEnVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
     	
-    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
+    	Optional <Docent> docentOptional = ds.getDocentById(docentid);
     	Optional <Vak> vakOptional = vs.toonVakById(vakid);
     	
     	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
@@ -124,18 +126,18 @@ public class ToetsEndpoint {
     //TODO
     @GetMapping("toonToetsenVan/{docentid}/{vakid}/{klasid}")
     public Stream<ToetsDto> toonToetsenVan(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
-    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
-    	Optional <Vak> vakOptional = vs.toonVakById(vakid);
+    	Docent docent = ds.getDocentById(docentid).get();
+    	Vak vak = vs.toonVakById(vakid).get();
+    	Klas k = ks.getKlasById(klasid).get();
+    	Docentvak dv = dvs.getByDocentAndVak(docent, vak);
     	
-    	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
-    	
-    	return ts.findToetsByDocentvakAndKlas(dv.getId(), klasid).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
+    	return ts.findToetsByDocentvakAndKlas(dv, k).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
     }
     
     @PostMapping("/api/maakToets")
     public void maakToetsAan(@RequestBody ToetsDto toetsDto) {
     	Klas k = ks.getKlasById(toetsDto.getKlasid()).get();
-    	Optional <Docent> docentOptional = ds.toonDocentById(toetsDto.getDocentid());
+    	Optional <Docent> docentOptional = ds.getDocentById(toetsDto.getDocentid());
     	Optional <Vak> vakOptional = vs.toonVakById(toetsDto.getVakid());
     	
     	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());

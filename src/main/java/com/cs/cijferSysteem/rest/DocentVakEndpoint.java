@@ -38,7 +38,7 @@ public class DocentVakEndpoint {
 	@GetMapping("/klassenVanDocentEnVak/{docentid}/{vakid}")
 	public Stream<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
 		
-    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
+    	Optional <Docent> docentOptional = ds.getDocentById(docentid);
     	Optional <Vak> vakOptional = vs.toonVakById(vakid);
     	
 		List<Klas> klassen = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get()).getKlassen();

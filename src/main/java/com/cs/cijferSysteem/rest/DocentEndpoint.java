@@ -48,7 +48,7 @@ public class DocentEndpoint {
 
 	@PostMapping("/api/voegDocentVakToeAanDocent/{docentid}")
 	public void voegDocentVakToeAanDocent(@PathVariable("docentid") Long docentid, @RequestBody Docentvak dv) {
-		ds.toonDocentById(docentid).get().voegDocentVakToe(dv);
+		ds.getDocentById(docentid).get().voegDocentVakToe(dv);
 	} 
 	
 	@GetMapping("/docentOverzicht")
@@ -59,7 +59,7 @@ public class DocentEndpoint {
 	
 	@GetMapping("/docent/{id}")
 	public Optional<DocentDto> getDocentById(@PathVariable("id")Long id){ 
-		return ds.toonDocentById(id).map(d -> new DocentDto(d.getId(), d.getAchternaam(), d.getVoornaam()));
+		return ds.getDocentById(id).map(d -> new DocentDto(d.getId(), d.getAchternaam(), d.getVoornaam()));
 	}
 	
 	@GetMapping("/vakkenVanDocent/{docentid}")
