@@ -1,6 +1,9 @@
 package com.cs.cijferSysteem.controller;
 
+import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Toets;
+import com.cs.cijferSysteem.domein.Vak;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +43,7 @@ public class ToetsService {
     	return tr.findByKlasId(klasid);
     }
 
+    public List<Toets> findByDocentvak(Docentvak dv){
+    	return tr.findByDocentvak(dv);
+    }
 }

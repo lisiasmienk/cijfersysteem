@@ -27,8 +27,8 @@ public class LeerlingEndpoint {
 		return ls.laatLeerlingZien().stream().map(l -> new CreateLeerlingDto(l.getId(), l.getVoornaam(), l.getAchternaam(), l.getGeboorteDatum().toString()));
 	}
 
-	@GetMapping("/leerling/{id}")
-	public Optional<CreateLeerlingDto> getLeerlingById(@PathVariable("id") Long id){
+	@GetMapping("/leerling/{leerlingid}")
+	public Optional<CreateLeerlingDto> getLeerlingById(@PathVariable("leerlingid") Long id){
 		return ls.toonLeerling(id).map(l -> new CreateLeerlingDto(l.getId(), l.getAchternaam(), l.getVoornaam(), l.getGeboorteDatum().toString()));
 	}
 

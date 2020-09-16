@@ -14,6 +14,7 @@ import com.cs.cijferSysteem.controller.CijferService;
 import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
+import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.ToetsService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Cijfer;
@@ -23,6 +24,7 @@ import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CijferDto;
+import com.cs.cijferSysteem.dto.CijferoverzichtLeerling;
 import com.cs.cijferSysteem.dto.LeerlingCijfersVanDocentVakDto;
 
 @RestController
@@ -40,10 +42,30 @@ public class CijferEndpoint {
 	DocentService ds;
 	@Autowired
 	VakService vs;
+	@Autowired
+	LeerlingService ls;
 	
     @GetMapping("/toetsCijferOverzicht")
     public Stream<CijferDto> geefOverzichtToetsCijfering() {
         return tcs.laatToetsCijfersZien().stream().map(c -> new CijferDto(c.getId(), c.getCijfer()));
+    }
+    
+    @GetMapping("cijfersVan/{leerlingid}")
+    public List<CijferoverzichtLeerling> cijferoverzichtLeerling(@PathVariable("leerlingid") Long leerlingid){
+    	Leerling l = ls.toonLeerling(leerlingid).get();
+    	List<Cijfer> cijfersVanLeerling = tcs.cijfersVanLeerling(l);
+    	List<CijferoverzichtLeerling> cijferoverzicht = new ArrayList<>();
+    	
+    	for(Docentvak dv : l.getKlassen().get(0).getDocentvakken()) {
+        	List<Float> cijfersVanLeerlingVanVak = new ArrayList<>();
+        	for(Cijfer c : cijfersVanLeerling) {
+        		if(cijfersVanLeerling.get(0).getToets().getDocentvak().equals(dv)) {
+        			cijfersVanLeerlingVanVak.add(c.getCijfer());
+        		}
+        	}
+            cijferoverzicht.add(new CijferoverzichtLeerling(dv.getVak().getNaam(), cijfersVanLeerlingVanVak));
+       	}    	 	
+    	return cijferoverzicht;
     }
     
     @GetMapping("toonCijfersVan/{docentid}/{vakid}/{klasid}")
